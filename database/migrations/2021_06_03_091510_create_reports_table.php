@@ -21,10 +21,12 @@ class CreateReportsTable extends Migration
             $table->text('toc');
             $table->text('description');
             $table->date('published');
-            $table->integer('category_id');
-            $table->integer('single_price');
-            $table->integer('multiple_price');
-            $table->integer('corporate_price');
+            $table->integer('single_price')->unsigned();
+            $table->integer('multiple_price')->unsigned();
+            $table->integer('corporate_price')->unsigned();
+            $table->integer('category_id')->index()->unsigned();
+            $table->integer('user_id')->index()->unsigned();
+            $table->integer('meta_id')->index()->unsigned();
             $table->boolean('status');
             $table->timestamps();
         });

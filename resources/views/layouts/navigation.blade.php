@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-gray-100">
+<nav x-data="{ open: false }" class="{{ request()->routeIs('home') ? 'absolute z-20 w-full' : 'bg-white border-gray-100' }}">
     <!-- Primary Navigation Menu -->
     <div id="topNav" class="w-full">
         <x-container containerClasses="flex justify-between h-14">
@@ -7,7 +7,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         {{-- <x-application-logo class="block h-12 w-auto fill-current text-gray-600" /> --}}
-                        <img src="/images/logo.jpg" class="block h-12 w-auto" alt="" />
+                        <img src="{{ asset('images/logo.jpg') }}" class="block h-12 w-auto" alt="" />
                     </a>
                 </div>
 
@@ -15,14 +15,21 @@
                 <div class="hidden space-x-6 sm:-my-px sm:ml-10 sm:flex">
                     @if (Auth::check())
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2 text-gray-400"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
                             {{ __('Dashboard') }}
                         </x-nav-link>
+                        @if (Auth::user()->isAdmin() || Auth::user()->isEmployee())
+                            <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2 text-gray-400"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                {{ __('Admin Panel') }}
+                            </x-nav-link>
+                        @endif
                     @endif
                     
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
+            <!-- Search Dropdown -->
             <div class="hidden space-x-4 sm:-my-px sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="w-56">
                     <x-slot name="trigger">
@@ -72,7 +79,6 @@
                             </x-dropdown-header>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
                                 <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
@@ -105,7 +111,7 @@
             <x-nav-link :href="route('home')" :active="request()->routeIs('about')">
                 {{ __('About Us') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')" :active="request()->routeIs('reports')">
+            <x-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                 {{ __('Reports') }}
             </x-nav-link>
 
@@ -121,13 +127,11 @@
                     <x-dropdown-header>
                         {{ __('Industries') }}
                     </x-dropdown-header>
-                    <x-dropdown-link :href="route('home')">{{ __('Advanced Materials') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Aerospace') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Agriculture') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Electronics & Semiconductors') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Energy & Power') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Food & Beverages') }}</x-dropdown-link>
-                    <x-dropdown-link :href="route('home')">{{ __('Healthcare') }}</x-dropdown-link>
+                    @if($categories)
+                        @foreach ($categories as $category)
+                            <x-dropdown-link :href="route('reports.category', $category->slug)">{{ $category->name }}</x-dropdown-link>
+                        @endforeach
+                    @endif
                 </x-slot>
             </x-dropdown>
             

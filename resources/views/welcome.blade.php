@@ -42,7 +42,7 @@
                 </x-container>
             </section>
 
-            <section class="bg-yellow-50 py-28 bg-pattern relative blk3">
+            <section class="bg-blue-50 py-28 bg-pattern relative blk3">
                 <x-container>
                     <h2 class="text-3xl mb-16 text-center tracking-wide">Gain Insights to Accelerate Growth</h2>
                     <div class="flex justify-between space-x-10">
@@ -70,7 +70,7 @@
                 </x-container>
             </section>
 
-            <section class="bg-yellow-300 text-white py-28 text-center bg-pattern blk4">
+            <section class="bg-blue-700 text-white py-28 text-center bg-pattern blk4">
                 <x-container>
                     <h2 class="text-4xl mb-16 font-black">Services</h2>
                     <div class="flex justify-between space-x-10">

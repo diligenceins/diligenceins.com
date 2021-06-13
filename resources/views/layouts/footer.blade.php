@@ -4,14 +4,11 @@
 			<div class="w-1/4">
 				<h5 class="font-semibold mb-4 text-blue-300">INDUSTRIES</h5>
 				<ul class="leading-7">
-					<li><a class="hover:text-yellow-400" href="#">Aerospace</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Agriculture</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Automation</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Chemicals</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Electronics & Semiconductors</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Energy & Power</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Food & Beverages</a></li>
-					<li><a class="hover:text-yellow-400" href="#">Healthcare</a></li>
+					@if ($categories)
+						@foreach ($categories as $category)
+							<li><a class="hover:text-yellow-400" href="{{ route('reports.category', $category->slug) }}">{{ $category->name }}</a></li>
+						@endforeach
+					@endif
 				</ul>
 			</div>
 			<div class="w-1/4">

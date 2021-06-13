@@ -1,38 +1,48 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+    a:hover {
+        @apply text-blue-400;
+    }
+}
 
 @layer components {
-	/*Button Default*/
-	.btn {
-		@apply inline-flex items-center px-6 py-3 bg-gray-900 border-2 border-gray-900 font-semibold text-sm text-white tracking-wide transition ease-in-out duration-150;
-	}
-	.btn:hover {
-		@apply bg-transparent text-gray-900;
-	}
-	.btn:active {
-		@apply bg-gray-800;
-	}
-	.btn:focus {
-		@apply outline-none ring ring-gray-300;
-	}
-	.btn:disabled {
-		@apply opacity-25 cursor-text;
-	}
+    /*Button Default*/
+    .btn {
+        @apply inline-flex items-center px-6 py-3 bg-gray-900 border-2 border-gray-900 font-semibold text-sm text-white tracking-wide transition ease-in-out duration-150;
+    }
+    .btn:hover {
+        @apply bg-transparent text-gray-900;
+    }
+    .btn:active {
+        @apply bg-gray-800;
+    }
+    .btn:focus {
+        @apply outline-none ring ring-gray-300;
+    }
+    .btn:disabled {
+        @apply opacity-25 cursor-text;
+    }
 
-	/*Button Primary*/
-	.btn.primary {
-		@apply bg-indigo-400 border-indigo-400;
-	}
+    /*Button Primary*/
+    .btn.primary {
+        @apply bg-indigo-400 border-indigo-400;
+    }
 
-	/*Button Invert*/
-	.btn.invert {
-		@apply bg-transparent text-gray-900;
-	}
-	.btn.invert:hover {
-		@apply bg-gray-900 text-white;
-	}
-	.bg-pattern {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%2338bdf8' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")
+    /*Button Invert*/
+    .btn.invert {
+        @apply bg-transparent text-gray-900;
+    }
+    .btn.invert:hover {
+        @apply bg-gray-900 text-white;
+    }
+    .bg-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%2338bdf8' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    .mdx-content p {
+        @apply mb-4;
     }
 }

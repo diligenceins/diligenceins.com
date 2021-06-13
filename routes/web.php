@@ -1,6 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,21 +14,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/report/{slug}', function ($slug) {
-    return view('report');
-})->name('report');
+Route::get('/report/{category}/{report}', [ReportController::class, 'index'])->name('report');
 
-Route::get('/reports', function () {
-    return view('reports');
-})->name('reports');
+Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
+
+Route::get('/reports/{category}', [ReportsController::class, 'category'])->name('reports.category');
+
+
+// GUEST DASHBOARD
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
