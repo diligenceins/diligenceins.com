@@ -4,7 +4,7 @@
             {{ $logo }}
         </div>
         <div class="mb-8 mt-4 flex justify-center">
-            <img class="w-32" src="{{ asset('images/logo.jpg') }}">
+            <img class="h-12" src="{{ asset('images/logo-sm.jpg') }}">
         </div>
         {{ $slot }}
     </div>

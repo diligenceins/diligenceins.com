@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="{{ request()->routeIs('home') ? 'absolute z-20 w-full' : 'bg-white border-gray-100' }}">
+<nav x-data="{ open: false }" class="bg-white border-gray-100">
     <!-- Primary Navigation Menu -->
     <div id="topNav" class="w-full">
         <x-container containerClasses="flex justify-between h-14">
@@ -7,7 +7,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         {{-- <x-application-logo class="block h-12 w-auto fill-current text-gray-600" /> --}}
-                        <img src="{{ asset('images/logo.jpg') }}" class="block h-12 w-auto" alt="" />
+                        <img src="{{ asset('images/logo-sm.jpg') }}" class="block h-12 w-auto" alt="" />
                     </a>
                 </div>
 
@@ -135,9 +135,24 @@
                 </x-slot>
             </x-dropdown>
             
-            <x-nav-link :href="route('home')" :active="request()->routeIs('services')">
-                {{ __('Services') }}
-            </x-nav-link>
+            <x-dropdown triggerClasses="h-full" align="right" width="w-56">
+                <x-slot name="trigger">
+                    <button class="inline-flex h-full items-center text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none">
+                        {{ __('Services') }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-header>
+                        {{ __('Services') }}
+                    </x-dropdown-header>
+                    <x-dropdown-link :href="route('reports')">{{  __('Syndicated Research') }}</x-dropdown-link>
+                    <x-dropdown-link :href="route('reports')">{{  __('Custom Research') }}</x-dropdown-link>
+                    <x-dropdown-link :href="route('reports')">{{  __('Consulting') }}</x-dropdown-link>
+                </x-slot>
+            </x-dropdown>
+            
             <x-nav-link :href="route('home')" :active="request()->routeIs('contact')">
                 {{ __('Contact Us') }}
             </x-nav-link>
@@ -145,10 +160,43 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden border-b">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                {{ __('Admin') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('About Us') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                {{ __('Reports') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="#">
+                {{ __('Industries') }}
+            </x-responsive-nav-link>
+            <div class="bg-gray-50 border p-4">
+                @if($categories)
+                    @foreach ($categories as $category)
+                        <x-responsive-nav-link :href="route('reports.category', $category->slug)">{{ $category->name }}</x-responsive-nav-link>
+                    @endforeach
+                @endif
+            </div>
+            <x-responsive-nav-link href="#">
+                {{ __('Services') }}
+            </x-responsive-nav-link>
+            <div class="bg-gray-50 border p-4">
+                <x-responsive-nav-link :href="route('reports')">{{ __('Syndicated Research') }}</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports')">{{ __('Custom Research') }}</x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports')">{{ __('Consulting') }}</x-responsive-nav-link>
+            </div>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Contact Us') }}
             </x-responsive-nav-link>
         </div>
 

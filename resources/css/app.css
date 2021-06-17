@@ -45,4 +45,16 @@
     .mdx-content p {
         @apply mb-4;
     }
+    .tab a {
+        @apply py-3 px-6 bg-gray-50 border-t border-r w-full hover:bg-gray-100;
+    }
+    .tab a.active {
+        @apply bg-blue-400 border-blue-400 text-white;
+    }
+    .tab a:hover {
+        @apply bg-gray-100;
+    }
+    .tab a.active:hover {
+        @apply bg-blue-400;
+    }
 }

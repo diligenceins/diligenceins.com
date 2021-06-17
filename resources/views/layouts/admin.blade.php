@@ -38,7 +38,7 @@
             class="block text-center text-gray-600 mx-auto p-2 px-0"
             href="/"
           >
-            <img class="h-12" src="{{ asset('images/logo.jpg') }}" alt="">
+            <img class="h-12" src="{{ asset('images/logo-sm.jpg') }}" alt="">
           </a>
           <ul class="md:hidden items-center flex flex-wrap list-none">
             <li class="inline-block relative">

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
 use App\Models\Category;
+use App\Models\Page;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,12 @@ class ViewServiceProvider extends ServiceProvider
             $categories = Category::all();
 
             $view->with('categories', $categories);
+        });
+
+        View::composer('layouts.footer', function ($view) {
+            $pages = Page::all();
+
+            $view->with('pages', $pages);
         });
     }
 }

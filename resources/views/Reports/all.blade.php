@@ -9,8 +9,8 @@
         </x-container>
     </header>
 
-    <x-container containerClasses="flex justify-between space-x-10 my-4">
-    	<div class="px-8 py-6 bg-white rounded border w-full">
+    <x-container containerClasses="flex flex-wrap lg:flex-nowrap justify-between space-x-10 my-4">
+    	<div class="px-4 md:px-8 py-6 bg-white rounded border w-full">
 			<h2 class="text-xl font-black text-gray-600">Reports</h2>
     		@if ($reports->total() > 0)
 				@foreach ($reports as $report)
@@ -28,7 +28,7 @@
 								<span class="mx-2"><svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
 								<span>{{ $report->sku }}</span>
 							</div>
-							<span class="border border-blue-400 text-xs px-2 py-1 rounded text-blue-400">$ {{ $report->single_price }}</span>
+							<span class="border m-1 border-blue-400 text-xs px-2 py-1 rounded text-blue-400">$ {{ $report->single_price }}</span>
 						</div>
 					</div>
 				@endforeach
