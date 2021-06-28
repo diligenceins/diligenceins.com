@@ -21,4 +21,15 @@ class ReportsController extends Controller
 
         return view('reports.category', compact('reports', 'category'));
     }
+
+    public function search(Request $request) {
+        $search = $request->input('query');
+
+        if(empty($search))
+            abort(404);
+
+        $reports = Report::where('title', 'LIKE', "%{$search}%")->orWhere('sku', 'LIKE', "%{$search}%")->paginate(20);
+
+        return view('reports.search', compact('reports'));
+    }
 }

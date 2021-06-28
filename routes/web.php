@@ -5,6 +5,8 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PageController;
 
+use App\Models\Report;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +21,8 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 
 Route::get('/', function () {
-    return view('welcome');
+    $reports = Report::where('status', 1)->latest('published')->limit(8)->get();
+    return view('welcome', compact('reports'));
 })->name('home');
 
 Route::get('/report/{report}/request-sample', [ReportController::class, 'sample'])->name('report.sample');
@@ -28,6 +31,7 @@ Route::get('/report/{category}/{report}', [ReportController::class, 'index'])->n
 
 Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
 Route::get('/reports/{category}', [ReportsController::class, 'category'])->name('reports.category');
+Route::get('/search/', [ReportsController::class, 'search'])->name('search');
 
 // GUEST DASHBOARD
 

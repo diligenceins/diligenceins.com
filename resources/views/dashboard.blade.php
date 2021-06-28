@@ -1,13 +1,5 @@
 <x-app-layout>
-    <header class="bg-blue-50 border-b border-blue-100 py-2 leading-6 text-sm text-gray-600">
-        <x-container>
-        	<ul class="flex items-center flex-wrap">
-        		<li><a href="{{ route('home') }}">Home</a></li>
-        		<li class="mx-1">/</li>
-        		<li class="text-gray-400">Profile</li>
-        	</ul>
-        </x-container>
-    </header>
+    <x-breadcrumb :list="['Home' => 'home']" active="Profile" />
 
     <div class="bg-pattern">
         <x-report-header>
@@ -15,7 +7,7 @@
 		</x-report-header>
         <x-container containerClasses="-mt-24 flex flex-wrap relative items-start">
             <ul class="w-full md:w-1/5 bg-white border p-4 rounded">
-                <li><a class="flex items-center mb-2" href="#">
+                <li><a class="flex items-center mb-2" href="{{ route('dashboard') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="{{ request()->routeIs('dashboard') ? 'fill-current text-blue-400' : '' }} mr-4" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
                     Profile
                 </a></li>

@@ -33,22 +33,19 @@
             <div class="hidden space-x-4 sm:-my-px sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="w-56">
                     <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <button class="flex items-center pl-2 text-gray-500 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         </button>
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- Authentication -->
                         <x-dropdown-header>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             {{ __('search') }}
                         </x-dropdown-header>
-                        <form method="POST" action="{{ route('home') }}" class="px-1 pt-1">
-                            @csrf
-                            <input class="w-full bg-gray-100 py-2 px-4 rounded-md focus:outline-none focus:bg-gray-200" />
-                            <button class="hidden" onclick="event.preventDefault();
-                                            this.closest('form').submit();">Search</button>
+                        <form method="GET" action="{{ route('search') }}" class="px-1 pt-1">
+                            <input name="query" class="w-full bg-gray-100 py-2 px-4 rounded-md focus:outline-none focus:bg-gray-200" />
+                            <button class="hidden" type="submit">Search</button>
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -108,7 +105,7 @@
             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-nav-link>
-            <x-nav-link :href="route('home')" :active="request()->routeIs('about')">
+            <x-nav-link :href="route('page', 'about')" :active="request()->routeIs('about')">
                 {{ __('About Us') }}
             </x-nav-link>
             <x-nav-link :href="route('reports')" :active="request()->routeIs('reports')">

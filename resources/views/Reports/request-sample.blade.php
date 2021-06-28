@@ -1,17 +1,11 @@
 <x-app-layout>
-	<header class="bg-blue-50 border-b border-blue-100 py-2 leading-6 text-sm text-gray-600">
-        <x-container>
-        	<ul class="flex items-center flex-wrap">
-        		<li><a href="{{ route('home') }}">Home</a></li>
-        		<li class="mx-1">/</li>
-        		<li><a href="{{ route('reports.category', $report->category->slug) }}">{{ $report->category->name }}</a></li>
-        		<li class="mx-1">/</li>
-        		<li><a href="{{ route('report', [$report->category->slug, $report->slug]) }}">{{ $report->title }}</a></li>
-                <li class="mx-1">/</li>
-        		<li class="text-gray-400">Request Sample</li>
-        	</ul>
-        </x-container>
-    </header>
+    <x-breadcrumb 
+        :list="[
+            'Home' => 'home', 
+            $report->category->name => ['reports.category', $report->category->slug],
+            $report->title => ['report', [$report->category->slug, $report->slug]]
+        ]" 
+        active="Request Sample" />
 
     <section class="bg-pattern">
         <x-report-header>
